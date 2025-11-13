@@ -26,10 +26,14 @@ public class IKTargetMovement : MonoBehaviour
             move += Vector3.forward;
         if (Input.GetKey(KeyCode.DownArrow))
             move += Vector3.back;
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
+            move += Vector3.up;
+        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftShift))
+            move += Vector3.down;
 
-        // Si aucun input, ne rien faire
-        if (move == Vector3.zero)
-            return;
+            // Si aucun input, ne rien faire
+            if (move == Vector3.zero)
+                return;
 
         // Position potentielle après déplacement
         Vector3 newPos = transform.position + move.normalized * speed;

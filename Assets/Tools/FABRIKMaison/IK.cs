@@ -48,69 +48,65 @@ public class IK : MonoBehaviour
 
     void Start()
     {
-        if (createChains)
+        if (debugLines)
+            Debug.Log("On crée une nouvelle CHAIN");
+        createChains = false;    // la chaîne est créée une seule fois, au début
+        chains.Clear();
+
+        // On va trouver le premier carrefour
+        Transform carrefour = FindFirstCarrefour(rootNode.transform);
+
+        if (carrefour == null)
         {
             if (debugLines)
-                Debug.Log("On crée une nouvelle CHAIN");
-            createChains = false;    // la chaîne est créée une seule fois, au début
-            chains.Clear();
+                Debug.LogWarning("Aucun carrefour trouvé dans l'arbre. On va créer une chaîne simple.");
+            IKChain simpleChain = new IKChain(rootNode.transform, srcNode, rootNode.transform, targetNode);
+            chains.Add(simpleChain);
+        }
 
-            // On va trouver le premier carrefour
-            Transform carrefour = FindFirstCarrefour(rootNode.transform);
-
-            if (carrefour == null)
-            {
-                if (debugLines)
-                    Debug.LogWarning("Aucun carrefour trouvé dans l'arbre. On va créer une chaîne simple.");
-                IKChain simpleChain = new IKChain(rootNode.transform, srcNode, rootNode.transform, targetNode);
-                chains.Add(simpleChain);
-            }
-
-            // Créer la chaîne principale (rootNode → carrefour)
-            if (carrefour != null && carrefour != rootNode.transform)
-            {
-                IKChain mainChain = new IKChain(rootNode.transform, carrefour, rootNode.transform, targetNode);
-                if (debugLines)
-                    Debug.Log($"Chaîne principale: {rootNode.name} → {carrefour.name}");
-                chains.Add(mainChain);
-            }
-
-            // Création des chaînes pour chaque branche à partir du carrefour
-            if (carrefour != null)
-            {
-                CreateBranchChains(carrefour);
-            }
-
+        // Créer la chaîne principale (rootNode → carrefour)
+        if (carrefour != null && carrefour != rootNode.transform)
+        {
+            IKChain mainChain = new IKChain(rootNode.transform, carrefour, rootNode.transform, targetNode);
             if (debugLines)
-                Debug.Log("Total chains created: " + chains.Count);
-            // Fusionner les joints partagés entre toutes les chaînes
-            if (chains.Count > 1)
-            {
-                if (debugLines)
-                    Debug.Log("=== Fusion des joints partagés ===");
+                Debug.Log($"Chaîne principale: {rootNode.name} → {carrefour.name}");
+            chains.Add(mainChain);
+        }
 
-                for (int i = 0; i < chains.Count; i++)
+        // Création des chaînes pour chaque branche à partir du carrefour
+        if (carrefour != null)
+        {
+            CreateBranchChains(carrefour);
+        }
+
+        if (debugLines)
+            Debug.Log("Total chains created: " + chains.Count);
+        // Fusionner les joints partagés entre toutes les chaînes
+        if (chains.Count > 1)
+        {
+            if (debugLines)
+                Debug.Log("=== Fusion des joints partagés ===");
+
+            for (int i = 0; i < chains.Count; i++)
+            {
+                for (int j = i + 1; j < chains.Count; j++)
                 {
-                    for (int j = i + 1; j < chains.Count; j++)
+                    // Comparer tous les joints de la chaîne i avec ceux de la chaîne j
+                    foreach (IKJoint ji in chains[i].GetJoints())
                     {
-                        // Comparer tous les joints de la chaîne i avec ceux de la chaîne j
-                        foreach (IKJoint ji in chains[i].GetJoints())
+                        foreach (IKJoint jj in chains[j].GetJoints())
                         {
-                            foreach (IKJoint jj in chains[j].GetJoints())
+                            if (ji.transform == jj.transform)
                             {
-                                if (ji.transform == jj.transform)
-                                {
-                                    // Fusionne jj vers ji (ji devient le maître)
-                                    jj.MergeWith(ji);
-                                    if (debugLines)
-                                        Debug.Log($"✓ Joint {ji.name} fusionné entre chaîne {i} et {j}");
-                                }
+                                // Fusionne jj vers ji (ji devient le maître)
+                                jj.MergeWith(ji);
+                                if (debugLines)
+                                    Debug.Log($"✓ Joint {ji.name} fusionné entre chaîne {i} et {j}");
                             }
                         }
                     }
                 }
             }
-
         }
     }
 
@@ -163,7 +159,7 @@ public class IK : MonoBehaviour
     {
         if (node == srcNode)
             return null;
-        
+
         if (node.childCount > 1)
             return node;
 

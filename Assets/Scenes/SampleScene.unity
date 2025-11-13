@@ -250,9 +250,9 @@ MonoBehaviour:
   rightFootHome: {fileID: 423744168}
   leftFootHome: {fileID: 1040926051}
   moveSpeed: 2
-  stepDistance: 0.8
-  stepSpeed: 2
-  stepHeight: 0.1
+  stepDistance: 0.5
+  stepSpeed: 1
+  stepHeight: 0.4
   playerTransform: {fileID: 566188230}
   rangeForMovement: 10
   debugLines: 0
@@ -1602,7 +1602,7 @@ Transform:
   m_GameObject: {fileID: 423744167}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.127, y: 0, z: 0}
+  m_LocalPosition: {x: 0.12699732, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3370,7 +3370,7 @@ Transform:
   m_GameObject: {fileID: 1040926050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.124, y: 0, z: 0}
+  m_LocalPosition: {x: -0.12400214, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3624,8 +3624,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168663222}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 118.259, y: 0, z: -4.235}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 118.265, y: 0, z: -4.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3932,9 +3932,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 478390610}
   - {fileID: 423744168}
   - {fileID: 1040926051}
-  - {fileID: 478390610}
   m_Father: {fileID: 1801312740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1341103797 stripped
@@ -4799,8 +4799,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558529275}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 118.519005, y: 0, z: -4.231}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 118.516, y: 0, z: -4.197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4817,7 +4817,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 123.34
+      value: 120.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4825,7 +4825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.22
+      value: -6.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5204,7 +5204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28a910a518214247b5e7b4fe5eaecbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IKTargetMovement
-  speed: 0.1
+  speed: 0.01
   GameObjectToLimit: {fileID: 1966120710}
   maxDistance: 10
 --- !u!135 &1649207963
@@ -5487,7 +5487,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: e141bb326e2f23042a9e2ad5db589062, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -5525,7 +5525,7 @@ MonoBehaviour:
   rootNode: {fileID: 752912032}
   srcNode: {fileID: 436234883}
   targetNode: {fileID: 1558529276}
-  createChains: 1
+  createChains: 0
   nb_ite: 2
   unique_target: 0
   ikStepKey: 105
@@ -5547,7 +5547,7 @@ MonoBehaviour:
   rootNode: {fileID: 1997747112}
   srcNode: {fileID: 1669765414}
   targetNode: {fileID: 1168663223}
-  createChains: 1
+  createChains: 0
   nb_ite: 2
   unique_target: 0
   ikStepKey: 108
@@ -6573,6 +6573,6 @@ SceneRoots:
   - {fileID: 630361592}
   - {fileID: 739341261}
   - {fileID: 2003011482}
-  - {fileID: 1168663223}
   - {fileID: 1558529276}
+  - {fileID: 1168663223}
   - {fileID: 1727979443}

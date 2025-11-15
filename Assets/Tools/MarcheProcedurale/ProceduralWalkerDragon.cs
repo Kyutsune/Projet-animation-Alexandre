@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class QuadrupedProceduralWalker : MonoBehaviour
+public class ProceduralWalkerDragon : MonoBehaviour
 {
     [Header("Références IK, en gris dans la scène, c'est ça que les IK vont suivre")]
     [Tooltip("Target IK pour la patte avant droite")]
@@ -29,11 +29,17 @@ public class QuadrupedProceduralWalker : MonoBehaviour
     [Tooltip("La cible, l'endroit que l'on veut que le corps suive globalement, en bleu dans la scène")]
     public Transform movementGoal;
 
+    [Tooltip("Transform du cou du dragon (départ de la laisse, seulement visuel)")]
+    public Transform dragonNeck;
+
     [Header("Paramètres de marche")]
-    public float moveSpeed = 2f;
+    public float goalSpeed = 2f;
+    public float stepSpeed = 1f;
     public float stepDistance = 0.8f;
-    public float stepSpeed = 2f;
     public float stepHeight = 0.2f;
+
+    [Tooltip("Le LineRenderer qui dessine la laisse, seulement visuel")]
+    public LineRenderer visualLeashRenderer;
 
     [Header("Contrôle et débogage")]
     [Tooltip("Référence du joueur pour la limite de distance")]
@@ -66,33 +72,48 @@ public class QuadrupedProceduralWalker : MonoBehaviour
 
         if (canMove)
         {
-            movementGoal.position += move.normalized * moveSpeed * Time.deltaTime;
+            movementGoal.position += move.normalized * goalSpeed * Time.deltaTime;
         }
 
         UpdateStepping();
         UpdateBodyPosition();
+
+        // Mise à jour de la laisse virtuelle, encore une fois que du visuel pour tester
+        if(visualLeashRenderer != null && dragonNeck != null)
+        {
+            visualLeashRenderer.SetPosition(0, dragonNeck.position);
+            visualLeashRenderer.SetPosition(1, movementGoal.position);
+        }
     }
 
     void UpdateStepping()
     {
         if (phase == StepPhase.FR_BL)
         {
+            // Tente de bouger FR. L'action finale est de vérifier si l'autre patte a fini.
             TryStep(frontRightTarget, frontRightHome, fr, () =>
             {
-                TryStep(backLeftTarget, backLeftHome, bl, () =>
-                {
-                    phase = StepPhase.FL_BR;
-                });
+                if (!bl.moving) phase = StepPhase.FL_BR; // Si BL a aussi fini, on change.
+            });
+
+            // Tente de bouger BL. L'action finale est de vérifier si l'autre patte a fini.
+            TryStep(backLeftTarget, backLeftHome, bl, () =>
+            {
+                if (!fr.moving) phase = StepPhase.FL_BR; // Si FR a aussi fini, on change.
             });
         }
-        else
+        else // Idem pour l'autre phase (FL et BR)
         {
+            // Tente de bouger FL.
             TryStep(frontLeftTarget, frontLeftHome, fl, () =>
             {
-                TryStep(backRightTarget, backRightHome, br, () =>
-                {
-                    phase = StepPhase.FR_BL;
-                });
+                if (!br.moving) phase = StepPhase.FR_BL;
+            });
+
+            // Tente de bouger BR.
+            TryStep(backRightTarget, backRightHome, br, () =>
+            {
+                if (!fl.moving) phase = StepPhase.FR_BL;
             });
         }
     }
@@ -118,7 +139,7 @@ public class QuadrupedProceduralWalker : MonoBehaviour
     {
         Vector3 startPos = foot.position;
         float duration = Vector3.Distance(startPos, targetPosition) / stepSpeed;
-        if (duration < 0.05f) duration = 0.05f;
+        if (duration < 0.001f) duration = 0.001f;
 
         float t = 0f;
 

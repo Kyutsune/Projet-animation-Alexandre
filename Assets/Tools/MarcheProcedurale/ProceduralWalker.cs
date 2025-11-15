@@ -25,11 +25,12 @@ public class ProceduralWalker : MonoBehaviour
 
     [Header("Paramètres de marche")]
     [Tooltip("Vitesse de déplacement du 'movementGoal'")]
-    public float moveSpeed = 2f;
-    [Tooltip("Distance max avant de déclencher un pas")]
-    public float stepDistance = 0.8f;
+    public float goalSpeed = 2f;
     [Tooltip("Vitesse de déplacement du pied lors d'un pas")]
     public float stepSpeed = 2f;
+    [Tooltip("Distance max avant de déclencher un pas")]
+    public float stepDistance = 0.8f;
+
     [Tooltip("Hauteur de la courbe du pas")]
     public float stepHeight = 0.1f;
 
@@ -60,7 +61,7 @@ public class ProceduralWalker : MonoBehaviour
         if (canMove)
         {
             // Alors on va bouger la cible de mouvement
-            Vector3 displacement = move.normalized * moveSpeed * Time.deltaTime;
+            Vector3 displacement = move.normalized * goalSpeed * Time.deltaTime;
             movementGoal.position += displacement;
         }
 

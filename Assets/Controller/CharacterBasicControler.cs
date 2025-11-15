@@ -98,9 +98,9 @@ public class CharacterBasicControler : MonoBehaviour
             return;
         }
 
-        // On cherche la direction dans laquelle appliquer la poussée et on l'applique
-        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-        rb.AddForce(pushDir * pushPower, ForceMode.Impulse);
+        // On cherche la direction dans laquelle appliquer la poussée ainsi que la vélocité et on l'applique
+        Vector3 playerHorizontalVelocity = new Vector3(controller.velocity.x, 0, controller.velocity.z);
+        rb.AddForce(playerHorizontalVelocity * pushPower, ForceMode.Impulse);
     }
 
     void ThrowShuriken()

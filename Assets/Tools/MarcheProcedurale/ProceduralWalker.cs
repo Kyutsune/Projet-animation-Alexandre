@@ -46,7 +46,7 @@ public class ProceduralWalker : MonoBehaviour
     private bool _rightFootMoving = false;
     private bool _leftFootMoving = false;
 
-    void Update()
+    void LateUpdate()
     {
         Vector3 move = Vector3.zero;
         if (Input.GetKey(KeyCode.UpArrow))

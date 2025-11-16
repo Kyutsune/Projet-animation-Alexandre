@@ -2532,9 +2532,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621236219}
   serializedVersion: 5
-  m_Mass: 10
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 30
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5475,9 +5475,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394834697}
   serializedVersion: 5
-  m_Mass: 10
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_Mass: 30
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -6195,7 +6195,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 124.62
+      value: -6.19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6203,23 +6203,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.78
+      value: -6.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7660445
+      value: 0.9070598
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6427876
+      value: -0.42100188
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6227,7 +6227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 80
+      value: -49.796
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0de1781b5413de94eb7745418a5dfcd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -7424,7 +7424,7 @@ MonoBehaviour:
   rotationSpeed: 3
   pushPower: 2
   shurikenPrefab: {fileID: 5959291960176387872, guid: 2f098141a814690429ba84fcf73aeaa3, type: 3}
-  shurikenSpeed: 30
+  shurikenSpeed: 10
   shurikenLifeTime: 3
   firePoint: {fileID: 9615648}
 --- !u!143 &1966120712

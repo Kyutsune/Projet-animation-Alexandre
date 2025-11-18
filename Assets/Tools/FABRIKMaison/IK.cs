@@ -214,8 +214,11 @@ public class IK : MonoBehaviour
                     // Recherche d'une cible nommée "Target_<leaf name>"
                     target = null;
                     GameObject targetObj = GameObject.Find("Target_" + leaf.name);
-                    if (targetObj != null)
+                    if (targetObj != null){
                         target = targetObj.transform;
+                        if(debugLines)
+                            Debug.Log($"Cible unique trouvée pour la feuille {leaf.name} : {target.name}");
+                    }
                     else
                     {
                         if (debugLines)
